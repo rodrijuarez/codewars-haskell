@@ -1,19 +1,16 @@
 module WeightSort where
 
---import Data.Digits (digits)
+import Data.Digits (digits)
 import Data.List (sort)
 
 orderWeight :: [Char] -> [Char]
-orderWeight = unwords . map show . sort . map (FatNumber) . words . take 90
-
-digits 0 = []
-digits x = digits (x `div` 10) ++ [x `mod` 10]
+orderWeight = unwords . map show . sort . map (FatNumber) . words
 
 data FatNumber =
   FatNumber (String)
 
 weight :: FatNumber -> Int
-weight (FatNumber x) = sum $ digits $ read x :: Int
+weight (FatNumber x) = sum $ digits 10 $ read x :: Int
 
 instance Show FatNumber where
   show (FatNumber x) = x
