@@ -5,10 +5,7 @@ import Data.Either
 
 -- Kata link: https://www.codewars.com/kata/valid-parentheses/train/haskell
 validParentheses :: String -> Bool
-validParentheses xs =
-  case result of
-    (Right 0) -> True
-    _ -> False
+validParentheses xs = either (const False) (== 0) result
   where
     result = foldM solveParenthesis 0 xs
 
