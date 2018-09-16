@@ -29,11 +29,10 @@ snail :: [[Int]] -> [Int]
 snail [] = []
 snail [[]] = []
 snail [a] = a
-snail (first:rest) =
-  first ++
-  right (init rest) ++ bottom rest ++ left (init rest) ++ content (init rest)
+snail (top:rest) = top ++ right ++ bottom ++ left ++ content
   where
-    right = map last
-    bottom = reverse . last
-    left = reverse . map head
-    content = snail . map (drop 1 . init)
+    middle = init rest
+    right = map last middle
+    bottom = reverse $ last rest
+    left = reverse $ map head middle
+    content = snail $ map (drop 1 . init) middle
